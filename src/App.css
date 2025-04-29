@@ -1,0 +1,15 @@
+/* src/App.css */
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #f8f9fa; /* Default light background (slightly off-white) */
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  body.dark-mode {
+    background-color: #292929; /* Softer dark background */
+    color: #dcdcdc; /* Light gray text for better readability */
+  }
+  
+  /* You can add other global styles here */
