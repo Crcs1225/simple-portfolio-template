@@ -3,7 +3,7 @@
     <header :class="{ 'dark-mode': isDarkMode }">
       <div class="container">
         <div class="header-left">
-          <strong class="name">YOUR NAME</strong>/ DEVELOPER
+          <strong class="name d-flex">MDC</strong>/ DEVELOPER
         </div>
         <nav class="header-right">
           <div class="nav-links" :class="{ 'open': isMenuOpen }">
@@ -29,7 +29,7 @@
       </router-view>
     </main>
     <footer :class="{ 'dark-mode': isDarkMode }">
-      &copy; {{ new Date().getFullYear() }} Your Portfolio
+      &copy; {{ new Date().getFullYear() }} Marc Daniel Caracas. All rights reserved.
     </footer>
   </div>
 </template>

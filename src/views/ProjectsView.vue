@@ -17,6 +17,12 @@ import ProjectCard from '@/components/ProjectCard.vue'; // Adjust the path if ne
 import 'bootstrap-icons/font/bootstrap-icons.css'; // Make sure you have this imported in your main.js
 import { useStore } from 'vuex';
 
+// Import your project images
+import eventCalendarImage from '@/assets/calendar.jpg'; // **Replace with your actual path**
+import portfolioImage from '@/assets/portfolio.jpg';     // **Replace with your actual path**
+import mobileAppImage from '@/assets/mobile_app.jpg';     // **Replace with your actual path**
+import pds from '@/assets/pds.jpg'; 
+
 const store = useStore();
 const isDarkMode = computed(() => store.getters.isDarkMode);
 
@@ -24,26 +30,42 @@ const projects = ref([
   {
     id: 1,
     title: 'Web-Based Event Calendar',
-    image: 'https://via.placeholder.com/800x600?text=Event+Calendar', // Replace with your project image
+    image: eventCalendarImage, // Use the imported variable
     authorImage: 'https://github.com/twbs.png', // Replace with your avatar
     location: 'Lingayen, PH',
-    duration: '2 months',
+    duration: '3 months',
   },
   {
     id: 2,
-    title: 'Portfolio Website (This One!)',
-    image: 'https://via.placeholder.com/800x600?text=Portfolio', // Replace with your project image
+    title: 'Portfolio Website',
+    image: portfolioImage, // Use the imported variable
     authorImage: 'https://github.com/twbs.png', // Replace with your avatar
     location: 'Ilocos Region, PH',
-    duration: '1 month',
+    duration: '1 week',
   },
   {
     id: 3,
-    title: 'Mobile App Concept (Ongoing)',
-    image: 'https://via.placeholder.com/800x600?text=Mobile+App', // Replace with your project image
+    title: 'Mobile App for Thesis',
+    image: mobileAppImage, // Use the imported variable
     authorImage: 'https://github.com/twbs.png', // Replace with your avatar
-    location: 'Remote',
-    duration: 'Ongoing',
+    location: 'Pangasinan State University, Lingayen',
+    duration: '4 months',
+  },
+  {
+    id: 4,
+    title: 'Personal Data Sheet System',
+    image: pds, // Use the imported variable
+    authorImage: 'https://github.com/twbs.png', // Replace with your avatar
+    location: 'Lingayen, PH',
+    duration: '3 months',
+  },
+  {
+    id: 4,
+    title: 'Library Reservation App',
+    image: pds, // Use the imported variable
+    authorImage: 'https://github.com/twbs.png', // Replace with your avatar
+    location: 'Lingayen, PH',
+    duration: '1 week',
   },
   // Add more project objects here
 ]);

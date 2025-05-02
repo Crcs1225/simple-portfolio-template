@@ -33,28 +33,28 @@
         </div>
       </div>
       <div class="col-lg-6">
-        <form class="p-4 p-md-5 border rounded-3" :class="{ 'bg-dark': isDarkMode, 'bg-body-tertiary': !isDarkMode }">
+        <form class="p-4 p-md-5 border rounded-3" :class="{ 'bg-dark': isDarkMode, 'bg-body-tertiary': !isDarkMode }" @submit.prevent="sendEmail">
           <h3 class="mb-4" :class="{ 'text-white': isDarkMode, 'text-body-emphasis': !isDarkMode }">Send Me a Message</h3>
           <div class="row">
             <div class="col-md-6">
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="contactName" required :class="{ 'bg-secondary text-white': isDarkMode, 'bg-white text-dark': !isDarkMode }">
+                <input type="text" class="form-control" id="contactName" required v-model="contactName" :class="{ 'bg-secondary text-white': isDarkMode, 'bg-white text-dark': !isDarkMode }">
                 <label for="contactName" :class="{ 'text-light': isDarkMode }">Your Name</label>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="contactEmail" required :class="{ 'bg-secondary text-white': isDarkMode, 'bg-white text-dark': !isDarkMode }">
+                <input type="email" class="form-control" id="contactEmail" required v-model="contactEmail" :class="{ 'bg-secondary text-white': isDarkMode, 'bg-white text-dark': !isDarkMode }">
                 <label for="contactEmail" :class="{ 'text-light': isDarkMode }">Email address</label>
               </div>
             </div>
           </div>
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="contactSubject" :class="{ 'bg-secondary text-white': isDarkMode, 'bg-white text-dark': !isDarkMode }">
+            <input type="text" class="form-control" id="contactSubject" v-model="contactSubject" :class="{ 'bg-secondary text-white': isDarkMode, 'bg-white text-dark': !isDarkMode }">
             <label for="contactSubject" :class="{ 'text-light': isDarkMode }">Subject (Optional)</label>
           </div>
           <div class="form-floating mb-3">
-            <textarea class="form-control" id="contactMessage" style="height: 150px;" required :class="{ 'bg-secondary text-white': isDarkMode, 'bg-white text-dark': !isDarkMode }"></textarea>
+            <textarea class="form-control" id="contactMessage" style="height: 150px;" required v-model="contactMessage" :class="{ 'bg-secondary text-white': isDarkMode, 'bg-white text-dark': !isDarkMode }"></textarea>
             <label for="contactMessage" :class="{ 'text-light': isDarkMode }">Your Message</label>
           </div>
           <button class="w-100 btn btn-lg" type="submit" :class="{ 'btn-outline-light': isDarkMode, 'btn-primary': !isDarkMode }">Send Message</button>
@@ -72,12 +72,40 @@ const store = useStore();
 const isDarkMode = computed(() => store.getters.isDarkMode);
 
 // Reactive refs for your social media URLs
-const yourGithubUrl = ref('YOUR_GITHUB_URL');
-const yourLinkedinUrl = ref('YOUR_LINKEDIN_URL');
-const yourFacebookUrl = ref('YOUR_FACEBOOK_URL');
-const yourInstagramUrl = ref('YOUR_INSTAGRAM_URL');
+const yourGithubUrl = ref('https://github.com/Crcs1225');
+const yourLinkedinUrl = ref('https://linkedin.com/in/zrmdcs12');
+const yourFacebookUrl = ref('https://facebook.com/caracasmarcdan');
+const yourInstagramUrl = ref('https://instagram.com/nieru.cs');
 
-// Remember to replace these with your actual URLs!
+// Reactive refs for the form inputs
+const contactName = ref('');
+const contactEmail = ref('');
+const contactSubject = ref('');
+const contactMessage = ref('');
+
+// Your email address where you want to receive messages
+const yourEmailAddress = ref('mrcdnlcrcs@gmail.com'); // **REPLACE WITH YOUR EMAIL**
+
+const sendEmail = () => {
+  const subject = encodeURIComponent(contactSubject.value || 'Message from your Portfolio');
+  const body = encodeURIComponent(`Name: ${contactName.value}\nEmail: ${contactEmail.value}\n\nMessage:\n${contactMessage.value}`);
+
+  // Construct the mailto link
+  const mailtoLink = `mailto:${yourEmailAddress.value}?subject=${subject}&body=${body}`;
+
+  // Open the user's email client
+  window.location.href = mailtoLink;
+
+  // Optionally, you can clear the form after a short delay (as the mailto might not be instantaneous)
+  setTimeout(() => {
+    contactName.value = '';
+    contactEmail.value = '';
+    contactSubject.value = '';
+    contactMessage.value = '';
+  }, 100);
+};
+
+// Remember to replace your social media URLs and your email address!
 </script>
 
 <style scoped>
