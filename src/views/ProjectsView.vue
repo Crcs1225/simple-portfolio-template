@@ -22,6 +22,7 @@ import eventCalendarImage from '@/assets/calendar.jpg'; // **Replace with your a
 import portfolioImage from '@/assets/portfolio.jpg';     // **Replace with your actual path**
 import mobileAppImage from '@/assets/mobile_app.jpg';     // **Replace with your actual path**
 import pds from '@/assets/pds.jpg'; 
+import library from '@/assets/library.jpg'; 
 
 const store = useStore();
 const isDarkMode = computed(() => store.getters.isDarkMode);
@@ -62,7 +63,7 @@ const projects = ref([
   {
     id: 4,
     title: 'Library Reservation App',
-    image: pds, // Use the imported variable
+    image: library, // Use the imported variable
     authorImage: 'https://github.com/twbs.png', // Replace with your avatar
     location: 'Lingayen, PH',
     duration: '1 week',
