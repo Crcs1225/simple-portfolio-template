@@ -61,7 +61,7 @@ const projects = ref([
     duration: '3 months',
   },
   {
-    id: 4,
+    id: 5,
     title: 'Library Reservation App',
     image: library, // Use the imported variable
     authorImage: 'https://github.com/twbs.png', // Replace with your avatar

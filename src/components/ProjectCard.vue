@@ -2,15 +2,21 @@
   <div class="col">
     <div
       class="card card-cover h-100 overflow-hidden rounded-4 shadow-lg"
-      :class="{ 'dark-mode': isDarkMode, 'text-bg-dark': !isDarkMode }"
+      :class="{ 'dark-mode': isDarkMode }"
       :style="cardBackgroundStyle"
     >
       <div
         class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1"
-        :class="{ 'text-white': isDarkMode, 'text-bg-dark': !isDarkMode }"
+        :class="{
+          'text-white': isDarkMode,
+          'text-dark': !isDarkMode,
+          'light-mode-text-bg': !isDarkMode,
+          'dark-mode-text-bg': isDarkMode
+        }"
       >
         <h3
-          class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold text-white"
+          class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold"
+          :class="{ 'text-white': isDarkMode, 'text-dark': !isDarkMode }"
         >
           {{ props.project.title }}
         </h3>
@@ -28,26 +34,26 @@
           <li
             class="d-flex align-items-center me-3"
             v-if="props.project.location"
-            :class="{ 'text-light': isDarkMode, 'text-white': !isDarkMode }"
+            :class="{ 'text-light': isDarkMode, 'text-dark': !isDarkMode }"
           >
             <i
               class="bi bi-geo-fill me-2"
               role="img"
               aria-label="Location"
-              :class="{ 'text-light': isDarkMode, 'text-white': !isDarkMode }"
+              :class="{ 'text-light': isDarkMode, 'text-dark': !isDarkMode }"
             ></i>
             <small>{{ props.project.location }}</small>
           </li>
           <li
             class="d-flex align-items-center"
             v-if="props.project.duration"
-            :class="{ 'text-light': isDarkMode, 'text-white': !isDarkMode }"
+            :class="{ 'text-light': isDarkMode, 'text-dark': !isDarkMode }"
           >
             <i
               class="bi bi-calendar3 me-2"
               role="img"
               aria-label="Duration"
-              :class="{ 'text-light': isDarkMode, 'text-white': !isDarkMode }"
+              :class="{ 'text-light': isDarkMode, 'text-dark': !isDarkMode }"
             ></i>
             <small>{{ props.project.duration }}</small>
           </li>
@@ -75,18 +81,18 @@ const props = defineProps({
 });
 
 // Computed property to generate the background-image style
-const cardBackgroundStyle = computed(() => {
-  return {
-    'background-image': `url(${props.project.image})`
-  };
-});
+const cardBackgroundStyle = computed(() => ({
+  'background-image': `url(${props.project.image})`,
+  'background-size': 'cover',
+  'background-repeat': 'no-repeat',
+  'background-position': 'center'
+}));
 </script>
 
 <style scoped>
 .card-cover {
   background-size: cover;
   background-position: center;
-  
 }
 
 .text-shadow-1 {
@@ -98,35 +104,40 @@ const cardBackgroundStyle = computed(() => {
   color: #dcdcdc; /* Light text color */
 }
 
-/* Make the title always white */
 h3 {
-  color: white !important;
+  color: initial !important;
 }
 
 .dark-mode .text-white {
-  color: #dcdcdc !important; /* Ensure other white text is light in dark mode */
-}
-
-.dark-mode .text-bg-dark {
-  background-color: #383838 !important; /* Adjust if needed */
-}
-
-.dark-mode .text-body-emphasis {
   color: #dcdcdc !important;
 }
 
 .dark-mode .text-light {
-  color: #b0b0b0 !important; /* A slightly darker light color for secondary text */
+  color: #b0b0b0 !important;
 }
 
-.dark-mode .border-white {
-  border-color: #666 !important; /* Adjust border color of the image in dark mode */
+.text-dark {
+  color: black !important;
 }
 
-.dark-mode .border-secondary {
-  border-color: #888 !important; /* Adjust border color for dark mode */
+/* New: Light mode text background */
+.light-mode-text-bg {
+  background-color: rgba(255, 255, 255, 0.8); /* White with 80% opacity */
+  padding: 15px; /* Adjust padding as needed for the background area */
+  margin: -15px; /* Negative margin to counteract the padding on the inner div */
+  margin-bottom: 0;
 }
 
-/* You can add more specific styling for your project cards here */
-/* based on the provided example */
+/* New: Dark mode text background with opacity */
+.dark-mode-text-bg {
+  background-color: rgba(0, 0, 0, 0.7); /* Black with 70% opacity */
+  padding: 15px; /* Match padding of light mode for consistency */
+  margin: -15px; /* Negative margin to counteract the padding on the inner div */
+  margin-bottom: 0;
+}
+
+/* Adjust text-shadow for better contrast on both backgrounds */
+.text-shadow-1 {
+  text-shadow: none; /* Remove the text shadow, as the background will provide contrast */
+}
 </style>
